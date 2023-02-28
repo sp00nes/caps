@@ -1,0 +1,27 @@
+{
+  "name": "caps",
+  "version": "1.0.0",
+  "description": "## For React Applications",
+  "main": "hub.js",
+  "scripts": {
+    "start": "node hub.js",
+    "test": "jest --verbose --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sp00nes/caps.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sp00nes/caps/issues"
+  },
+  "homepage": "https://github.com/sp00nes/caps#readme",
+  "dependencies": {
+    "chance": "^1.1.10",
+    "eslint": "^8.35.0",
+    "express": "^4.18.2",
+    "jest": "^29.4.3"
+  }
+}
