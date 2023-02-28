@@ -1,37 +1,27 @@
-# package.json Notes:
+# LAB - 11
 
-## For React Applications
+## Deployment Test
 
- To deploy your application at GitHub pages, you'll need to add a home page property to your package.json which points to the deployed base URL of your GitHub Pages site.
- 
- *NOTE: This will break deployments to other hosting services such as Netlify, Vercel, or AWS Amplify, so if you later wish to deploy there, remove this property completely*
- 
-     {
-       "homepage": "https://yourname.github.io/repository-name"
-     }
+### Author: Martin Hansen
 
-## Node / Express Applications
+- [tests report](https://github.com/sp00nes/caps/actions)
+- [front-end](na)
 
-### For Tests
-Your Scripts section should have the following, so that you can easily run tests locally and in your CI
+### Setup
 
-  "scripts": {
-    "start": "node index.js",
-    "lint": "eslint **/*.js",
-    "test": "jest --verbose --coverage",
-    "test-watch": "jest --watchAll --verbose --coverage"
-},
+#### `.env` requirements
 
+- na
 
-### For NPM Modules
+#### Running the app
 
-If you are creating a module to deploy at NPM, you'll want a "bin" section that identifies the name of the global command to run and your .js file that runs when called.
+- `npm start`
 
-"bin": {
-    "fetch": "index.js"
-}
+#### Tests
 
-Additionally, that file should have as it's first line, so that it'll run without having to type "node filename.js" every time
+- Unit Tests: `npm run test`
+- Lint Tests: `npm run lint`
 
-#!/usr/bin/env node
+#### UML
 
+![UML Diagram]()
