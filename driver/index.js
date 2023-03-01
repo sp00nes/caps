@@ -1,21 +1,26 @@
 'use strict';
-//driver
 
-const eventPool = require('../eventPool.js');
-const { pickup, delivery } = require('./handler');
+// const eventPool = require('../../eventPool');
+const handler = require('./handler');
+const { io } = require('socket.io-client');
 
+const socket = io.connect('http://localhost:3001/caps');
 
-// waiting for PICKUP to be emitted.
-eventPool.on('PICKUP', pickupAndDeliver);
+// socket.emit('JOIN', payload.store); need to join room for specific store
 
-//only hub listens to pickup, vendor listens to delivery
-function pickupAndDeliver(payload) {
+socket.on('pickup', (payload) => {
   setTimeout(() => {
-    pickup(payload);
+    handler(payload);
   }, 1000);
+});
 
+socket.on('in-transit', (payload) => {
   setTimeout(() => {
-    delivery(payload);
-  }, 2000);
+    socket.emit('delivered', payload);
 
-}
+  }, 1000);
+});
+
+socket.on('delivered', (payload) => {
+  console.log(`DRIVER: delivered ${payload.orderID}`);
+});

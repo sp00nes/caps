@@ -1,18 +1,19 @@
 'use strict';
 
-const eventPool = require('../eventPool.js');
-const { createPackage, thankDriver } = require('./handler');
+const handler = require('./handler');
 
-//listeners
-eventPool.on('DELIVERY', (payload) => confirmDelivery(payload));
+const { io } = require('socket.io-client');
+const socket = io.connect('http://localhost:3001/caps');
 
-function confirmDelivery(payload) {
-  setTimeout(() => {
-    thankDriver(payload);
-  }, 1000);
-}
+let store = 'Game Store';
+//tells server that it joined
+socket.emit('join', store);
 
-// Start of cycle emits PICKUP, driver is listing
 setInterval(() => {
-  createPackage();
+  handler(store);
 }, 5000);
+
+socket.on('delivered', (payload) => {
+  console.log(`VENDOR: Thank you for delivering ${payload.orderID}`);
+  process.exit(0);
+});
