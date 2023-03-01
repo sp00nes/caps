@@ -1,30 +1,21 @@
 'use strict';
 
-const eventPool = require('../eventPool.js');
-let Chance = require('chance');
+const { io } = require('socket.io-client');
+const socket = io.connect('http://localhost:3001/caps');
 
-let chance = new Chance();
+var Chance = require('chance');
+var chance = new Chance();
 
-function createPackage(payload=null) {
-  if(!payload){
-    payload = {
-      store: 'EPIC GAME STORE',
-      orderId: chance.guid(),
-      customer: chance.name(),
-      address: chance.address(),
-    };
-  }
+module.exports = (store) => {
 
-  console.log('VENDOR: we have an order ready');
-  //Driver is listening
-  eventPool.emit('PICKUP', payload);
-}
+  const payload = {
+    store: store,
+    orderID: chance.guid(),
+    customer: chance.name(),
+    address: chance.address(),
+  };
 
-function thankDriver(payload){
-  console.log('Thank you for ordering ', payload.customer);
-}
+  // console.log(`PICKUP: ${{ payload }}`);
+  socket.emit('pickup', payload);
 
-module.exports = {
-  createPackage,
-  thankDriver,
 };
