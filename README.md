@@ -24,4 +24,5 @@
 
 #### UML
 
-![UML Diagram]()
+![lab 11 - 12 uml](lab-11,12.jpg)
+![lab 13](lab-13.jpg)
